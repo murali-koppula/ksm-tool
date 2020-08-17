@@ -1,0 +1,11 @@
+
+server:
+    port: 8080
+
+spring:
+    profiles: local
+
+keystore:
+    location: /app/security/ks.jks
+    type: jks
+    password: changeit

@@ -1,0 +1,13 @@
+
+server:
+    port: 8888
+
+keystore:
+    location: /app/security/ks.jks
+    type: jks
+    password: changeit
+
+repo:
+   type: git
+   url: http://a.b.com
+

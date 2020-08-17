@@ -1,0 +1,80 @@
+
+plugins {
+    id 'org.springframework.boot' version '2.3.1.RELEASE'
+    id 'io.spring.dependency-management' version '1.0.9.RELEASE'
+
+    id 'com.github.jk1.dependency-license-report' version '1.13'
+    id "com.gorylenko.gradle-git-properties" version "2.2.2"
+    id "io.freefair.lombok" version "5.1.0"
+
+    id 'java'
+    id 'application'
+}
+
+group = 'io.quantis'
+version = '0.1-SNAPSHOT'
+sourceCompatibility = '11'
+
+application {
+    mainClassName = 'io.quantis.KeystoreManagerApplication'
+}
+
+repositories {
+    jcenter()
+}
+
+jar {
+    enabled = false
+}
+
+bootJar {
+    enabled = true
+    mainClassName = 'io.quantis.KeystoreManagerApplication'
+}
+
+distZip {
+    enabled = false
+}
+
+bootDistZip {
+    enabled = false
+}
+
+distTar {
+    enabled = false
+}
+
+bootDistTar {
+    enabled = true
+    compression = Compression.GZIP
+    archiveExtension.set('tar.gz')
+    archiveBaseName.set(rootProject.name)
+}
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter'
+
+    implementation 'org.springframework.boot:spring-boot-starter-log4j2'
+    implementation('org.slf4j:slf4j-api:1.7.30')
+    implementation('org.apache.logging.log4j:log4j-slf4j-impl:2.13.3')
+
+    testImplementation('org.springframework.boot:spring-boot-starter-test') {
+        exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
+    }
+    testImplementation('junit:junit:4.13')
+    testImplementation('io.github.netmikey.logunit:logunit-core:1.1.0')
+    testRuntimeOnly('io.github.netmikey.logunit:logunit-log4j2:1.1.0')
+}
+
+configurations {
+    all {
+        exclude group: 'org.springframework.boot', module: 'spring-boot-starter-logging'
+        exclude group: 'org.springframework.boot', module: 'spring-boot-starter-tomcat'
+        exclude group: 'org.apache.tomcat'
+    }
+}
+
+test {
+    useJUnitPlatform()
+}
+
